@@ -1,0 +1,47 @@
+<div class="notes-container">
+  <div class="notes-header">
+    <h1 class="notes-title">My Notes</h1>
+    <div>
+      <span>Welcome, {{ currentUser }}!</span>
+      <button class="btn btn-danger" (click)="logout()">Logout</button>
+    </div>
+  </div>
+
+  <div class="add-note-form">
+    <h3>Add New Note</h3>
+    <div class="form-row">
+      <input 
+        type="text" 
+        [(ngModel)]="newNote.title" 
+        placeholder="Note title"
+        maxlength="255">
+    </div>
+    <div class="form-row">
+      <textarea 
+        [(ngModel)]="newNote.content" 
+        placeholder="Note content"
+        rows="4"></textarea>
+    </div>
+    <button class="btn btn-success" (click)="addNote()">Add Note</button>
+  </div>
+
+  <div *ngIf="message" [class]="messageType === 'success' ? 'success-message' : 'error-message'">
+    {{ message }}
+  </div>
+
+  <div class="notes-list" *ngIf="notes.length > 0; else emptyNotes">
+    <div class="note-card" *ngFor="let note of notes">
+      <div class="note-title">{{ note.title }}</div>
+      <div class="note-content">{{ note.content }}</div>
+      <div class="note-actions">
+        <button class="btn btn-danger" (click)="deleteNote(note.id)">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #emptyNotes>
+    <div class="empty-notes">
+      <p>No notes yet. Create your first note above!</p>
+    </div>
+  </ng-template>
+</div>

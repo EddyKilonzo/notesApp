@@ -1,0 +1,57 @@
+<div class="signup-container">
+  <div class="signup-form">
+    <h2 class="signup-title">Create Account</h2>
+    
+    <form (ngSubmit)="onSubmit()" #signupForm="ngForm">
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input 
+          type="text" 
+          id="name" 
+          name="name" 
+          [(ngModel)]="signupData.name" 
+          required 
+          placeholder="Enter your name">
+      </div>
+      
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input 
+          type="email" 
+          id="email" 
+          name="email" 
+          [(ngModel)]="signupData.email" 
+          required 
+          placeholder="Enter your email">
+      </div>
+      
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input 
+          type="password" 
+          id="password" 
+          name="password" 
+          [(ngModel)]="signupData.password" 
+          required 
+          placeholder="Enter your password">
+      </div>
+      
+      <button type="submit" class="btn" [disabled]="isLoading">
+        {{ isLoading ? 'Creating account...' : 'Sign Up' }}
+      </button>
+    </form>
+    
+    <div class="messages">
+      <div *ngIf="successMessage" class="success-message">
+        {{ successMessage }}
+      </div>
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+    </div>
+    
+    <div class="switch-form">
+      <p>Already have an account? <a routerLink="/login">Login here</a></p>
+    </div>
+  </div>
+</div>
